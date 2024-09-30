@@ -1,3 +1,5 @@
+import java.util.Iterator;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 class MyArrayListTest {
@@ -38,5 +40,19 @@ class MyArrayListTest {
         list.add("A");                         // Act
         assertFalse(list.isEmpty());// Assert
         assertEquals(1, list.size());
+    }
+
+
+    @org.junit.jupiter.api.Test
+    void iterator() {
+        MyArrayList list = new MyArrayList();  // Arrange
+        list.add("A");     list.add("B");
+        // Act
+        Iterator<String> list2 = list.iterator();
+        assertTrue(list2.hasNext());
+        assertEquals("A", list2.next());
+        assertTrue(list2.hasNext());
+        assertEquals("B", list2.next());
+        assertFalse(list2.hasNext());
     }
 }

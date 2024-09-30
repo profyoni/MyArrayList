@@ -37,7 +37,21 @@ public class MyArrayList implements List<String> {
 
     @Override
     public Iterator<String> iterator() {
-        return null;
+        return new MyArrayListIterator();
+    }
+
+    public class MyArrayListIterator implements Iterator<String> {
+
+        private int cursor = 0;
+        @Override
+        public boolean hasNext() {
+            return cursor < size();
+        }
+
+        @Override
+        public String next() {
+            return get(cursor++);
+        }
     }
 
     @Override
@@ -62,9 +76,7 @@ public class MyArrayList implements List<String> {
 
     private void growBackingStore() {
         String [] newBackingStore = new String[backingStore.length * 2 + 1];
-        for (int i = 0; i < backingStore.length; i++) {
-            newBackingStore[i] = backingStore[i];
-        }
+        System.arraycopy(backingStore, 0, newBackingStore, 0, backingStore.length);
         backingStore = newBackingStore;
 
     }
