@@ -3,6 +3,26 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.ListIterator;
 
+class MyArrayListIteratorIndependent implements Iterator<String> {
+
+    private MyArrayList listThis;
+    MyArrayListIteratorIndependent(MyArrayList myArrayListThis) {
+        listThis = myArrayListThis;
+    }
+
+    private int cursor = 0;
+    @Override
+    public boolean hasNext() {
+        return this.cursor < listThis.size();
+    }
+
+    @Override
+    public String next() {
+        return listThis.get(cursor++);
+    }
+}
+
+// x = al.size(); x = -100;
 //TIP To <b>Run</b> code, press <shortcut actionId="Run"/> or
 // click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
 public class MyArrayList implements List<String> {
@@ -22,12 +42,12 @@ public class MyArrayList implements List<String> {
 
     @Override
     public int size() {
-        return insertionPoint;
+        return this.insertionPoint;
     }
 
     @Override
     public boolean isEmpty() {
-        return size() == 0;
+        return this.size() == 0;
     }
 
     @Override
@@ -40,17 +60,18 @@ public class MyArrayList implements List<String> {
         return new MyArrayListIterator();
     }
 
+    // (non-static = plain vanilla) inner class
     public class MyArrayListIterator implements Iterator<String> {
 
         private int cursor = 0;
         @Override
         public boolean hasNext() {
-            return cursor < size();
+            return this.cursor < MyArrayList.this.size();
         }
 
         @Override
         public String next() {
-            return get(cursor++);
+            return MyArrayList.this.get(cursor++);
         }
     }
 
@@ -93,7 +114,10 @@ public class MyArrayList implements List<String> {
 
     @Override
     public boolean addAll(Collection<? extends String> c) {
-        return false;
+        for (String s : c) {
+            this.add(s);
+        }
+        return true; // sometimes return false
     }
 
     @Override
