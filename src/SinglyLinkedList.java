@@ -2,20 +2,15 @@ import java.util.*;
 
 
 
-public class SinglyLinkedList implements List<String> {
+public class SinglyLinkedList<T> implements List<T> {
 
-    private static class Node { // private = can be used / accessed only within this Outer Class (SinglyLinkedList)
+    private static class Node<T> { // private = can be used / accessed only within this Outer Class (SinglyLinkedList)
                                 // STATIC inner class = an instance of inner class DOES NOT have access to the outer instance
-        String data;
-        Node next;
-
-//        void CantAccessOuter()
-//        {
-//            int x = size();
-//        }
+        T data;
+        Node<T> next, prev;
     }
 
-    private Node head;
+    private Node<T> head = new Node<>(), tail; // dummy node
     private int size;
 
     @Override
@@ -30,7 +25,7 @@ public class SinglyLinkedList implements List<String> {
 
     @Override
     public boolean contains(Object o) {
-        Node currentNode = head;
+        Node currentNode = head.next;
         while (currentNode != null) {// iterate through nodes until next is null
             if ( (Objects.equals(o, currentNode.data)))// check each node's data if equal to o
                 return true;// if equal return true
@@ -40,7 +35,7 @@ public class SinglyLinkedList implements List<String> {
     }
 
     @Override
-    public Iterator<String> iterator() {
+    public Iterator<T> iterator() {
         return null;
     }
 
@@ -55,9 +50,9 @@ public class SinglyLinkedList implements List<String> {
     }
 
     @Override
-    public boolean add(String s) {
+    public boolean add(T s) {
         // newing up the Node and inserting data in it
-        Node newNode = new Node();
+        Node<T> newNode = new Node<T>();
         newNode.data = s;
         newNode.next = null;
 
@@ -65,7 +60,7 @@ public class SinglyLinkedList implements List<String> {
             this.head = newNode;
         }
         else{
-            Node lastNode = getLastNode();
+            Node<T> lastNode = getLastNode();
             lastNode.next = newNode;
         }
         size++;
@@ -73,8 +68,8 @@ public class SinglyLinkedList implements List<String> {
     }
 
     // helper method
-    private Node getLastNode() {
-        Node currentNode = head;
+    private Node<T> getLastNode() {
+        Node<T> currentNode = head;
         while (currentNode.next != null) {
             currentNode = currentNode.next;
         }
@@ -92,12 +87,12 @@ public class SinglyLinkedList implements List<String> {
     }
 
     @Override
-    public boolean addAll(Collection<? extends String> c) {
+    public boolean addAll(Collection<? extends T> c) {
         return false;
     }
 
     @Override
-    public boolean addAll(int index, Collection<? extends String> c) {
+    public boolean addAll(int index, Collection<? extends T> c) {
         return false;
     }
 
@@ -117,23 +112,34 @@ public class SinglyLinkedList implements List<String> {
     }
 
     @Override
-    public String get(int index) {
-        return "";
+    public T get(int index) {
+        return null;
     }
 
     @Override
-    public String set(int index, String element) {
-        return "";
+    public T set(int index, T element) {
+        return null;
     }
 
     @Override
-    public void add(int index, String element) {
+    public void add(int index, T element) {
 
     }
 
     @Override
-    public String remove(int index) {
-        return "";
+    public T remove(int index) {
+        Node<T> currentNode = head;
+        int indexCounter = -1;
+
+        // find node with index - 1
+        while (indexCounter != index - 1) {
+            indexCounter++;
+            currentNode = currentNode.next;
+        }
+        T data = currentNode.next.data;
+        currentNode.next = currentNode.next.next;
+        size--;
+        return data;
     }
 
     @Override
@@ -147,17 +153,17 @@ public class SinglyLinkedList implements List<String> {
     }
 
     @Override
-    public ListIterator<String> listIterator() {
+    public ListIterator<T> listIterator() {
         return null;
     }
 
     @Override
-    public ListIterator<String> listIterator(int index) {
+    public ListIterator<T> listIterator(int index) {
         return null;
     }
 
     @Override
-    public List<String> subList(int fromIndex, int toIndex) {
+    public List<T> subList(int fromIndex, int toIndex) {
         return List.of();
     }
 }

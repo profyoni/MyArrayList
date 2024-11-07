@@ -30,11 +30,11 @@ class MysteryIterator implements Iterator<String> {
 
 public class Main {
     public static void main(String[] args) {
-        List<String> aList = new MyArrayList();
-        aList.add("A");aList.add("B");aList.add("C");aList.add("D");
-        for(String s : aList){
-            System.out.println(s);
-        }
+//        List<String> aList = new MyArrayList();
+//        aList.add("A");aList.add("B");aList.add("C");aList.add("D");
+//        for(String s : aList){
+//            System.out.println(s);
+//        }
 //
 //        Mystery m = new Mystery();
 //        for( Iterator<String> it = m.iterator(); it.hasNext(); )
