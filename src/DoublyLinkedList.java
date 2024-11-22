@@ -4,13 +4,12 @@ import java.util.ListIterator;
 public class DoublyLinkedList<T> extends AbstractSequentialList<T> {
 
     public DoublyLinkedList() {
-        head = new Node<>(null); // dummy
-        tail = new Node<>(null);
         head.next = tail;
         tail.prev = head;
     }
 
-    private Node<T> head, tail;
+    private final Node<T> head = new Node<>(null), // dummy head
+                          tail = new Node<>(null); // dummy tail
     private int size;
 
     private static class Node<T> {
@@ -25,6 +24,8 @@ public class DoublyLinkedList<T> extends AbstractSequentialList<T> {
     {
         Node<T> cursor = head; // node before index
         MyListIterator(int index){
+            if (index < 0 || index >= size)
+                throw new IndexOutOfBoundsException(String.format("Index: %d, Size: %d", index, size));
             for (int i = 0;i < index;i++){
                 cursor = cursor.next;
             }
@@ -32,7 +33,7 @@ public class DoublyLinkedList<T> extends AbstractSequentialList<T> {
         }
         @Override
         public boolean hasNext() {
-            return false;
+            return cursor.next != tail;
         }
 
         @Override
