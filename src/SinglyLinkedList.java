@@ -36,7 +36,24 @@ public class SinglyLinkedList<T> implements List<T> {
 
     @Override
     public Iterator<T> iterator() {
-        return null;
+        return new MyLLIterator();
+    }
+
+    private class MyLLIterator implements Iterator<T> {
+
+        private Node<T> current = head;
+        @Override
+        public boolean hasNext() {
+            return current.next != null;
+        }
+
+        @Override
+        public T next() {
+            if ( ! hasNext()) // oh oh nothing left
+                throw new NoSuchElementException();
+            current = current.next;
+            return current.data;
+        }
     }
 
     @Override

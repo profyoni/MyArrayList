@@ -4,16 +4,16 @@ import java.util.Iterator;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-class SinglyLinkedListTest {
+class DoublyLinkedListTest {
 
-    private SinglyLinkedList<String> list = new SinglyLinkedList<>();  // Arrange
+    private DoublyLinkedList<String> list = new DoublyLinkedList<>();  // Arrange
 
-    @org.junit.jupiter.api.Test
+    @Test
     void size() {
         assertEquals(0, list.size());
     }
 
-    @org.junit.jupiter.api.Test
+    @Test
     void get() {
         list.add("a");
         list.add("b");
@@ -22,19 +22,19 @@ class SinglyLinkedListTest {
         assertEquals("b", actual);// Assert);
     }
 
-    @org.junit.jupiter.api.Test
+    @Test
     void ctor() {
         assertTrue(list.isEmpty());// Assert);
     }
 
-    @org.junit.jupiter.api.Test
+    @Test
     void add_11() {
         for (int i=0; i<11;i++)
             list.add("A");                         // Act
         assertEquals(11, list.size());
     }
 
-    @org.junit.jupiter.api.Test
+    @Test
     void add() {
         list.add("A");                         // Act
         assertFalse(list.isEmpty());// Assert
@@ -79,7 +79,7 @@ class SinglyLinkedListTest {
         assertFalse(list.contains("A"));
     }
 
-    @org.junit.jupiter.api.Test
+    @Test
     void iterator() {
         list.add("A");     list.add("B");
         // Act
@@ -90,7 +90,7 @@ class SinglyLinkedListTest {
         assertEquals("B", list2.next());
         assertFalse(list2.hasNext());
     }
-    @org.junit.jupiter.api.Test
+    @Test
     void iterator2() {
         list.add("A");     list.add("B");
         // Act
