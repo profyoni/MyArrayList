@@ -36,8 +36,7 @@ public class MyHashSet<T> implements Set<T> {
     }
 
     final double LOAD_FACTOR = 0.75;
-    private boolean reachedLoadFactor()
-    {
+    private boolean reachedLoadFactor() {
         return ((double) size) / hashTable.length >= LOAD_FACTOR;
     }
 
