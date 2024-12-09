@@ -15,6 +15,7 @@ class DoublyLinkedListTest {
 
     @Test
     void get() {
+        String s;
         list.add("a");
         list.add("b");
 

@@ -75,6 +75,7 @@ class SinglyLinkedListTest {
 
     @Test
     void containsNull2() {
+        Object o;
         list.add(null);list.add("B");
         assertFalse(list.contains("A"));
     }
